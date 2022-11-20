@@ -15,6 +15,9 @@ import os
 import datetime
 import glob
 import shutil
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

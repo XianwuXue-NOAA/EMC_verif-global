@@ -14,6 +14,9 @@ import pandas as pd
 import glob
 import numpy as np
 import netCDF4 as nc
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

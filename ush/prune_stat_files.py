@@ -11,6 +11,9 @@ import glob
 import subprocess
 import os
 import re
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

@@ -10,6 +10,9 @@ import sys
 import os
 import datetime
 import calendar
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

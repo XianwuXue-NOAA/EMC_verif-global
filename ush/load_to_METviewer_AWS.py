@@ -16,6 +16,9 @@ Abstract: This is run at the end of all step1 scripts
 import datetime
 import os
 import subprocess
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

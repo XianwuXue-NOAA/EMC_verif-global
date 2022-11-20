@@ -8,6 +8,9 @@ Abstract: This script is run by all step1 scripts in scripts/.
 
 import os
 import datetime
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

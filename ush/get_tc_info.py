@@ -8,6 +8,9 @@ Abstract: This script is called by get_data_files.py.
 
 import pandas as pd
 import datetime
+from functools import partial
+
+print = partial(print, flush=True)
 
 def get_tc_dict():
     """! Get supported TC dictionary

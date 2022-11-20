@@ -9,6 +9,9 @@ Abstract: This script is run by the maps2d and mapsda jobs scripts.
 import sys
 import os
 import re
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 

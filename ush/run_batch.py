@@ -7,6 +7,9 @@ Abstract: This script is run by run_verif_global.sh.
 '''
 
 import os
+from functools import partial
+
+print = partial(print, flush=True)
 
 print("BEGIN: "+os.path.basename(__file__))
 
