@@ -62,14 +62,16 @@ export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory /NCEPPROD/hpssprod/run
 export hpss_walltime="10"
 ## OUTPUT DATA SETTINGS
 #OUTPUTROOT: base output directory
-export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone_ctl_rpl_c00_g2g_step2"
+export start_date=20190506
+export end_date=20190530
+export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone_ctl_rpl_c00_g2g_step2_${start_date}_${end_date}"
 ## DATE SETTINGS
 #start_date:       verification start date, format YYYYMMDD
 #end_date:         verification end date, format YYYYMMDD
 #make_met_data_by: how to treat dates, "VALID" or "INIT"
 #plot_by:          how to plot data, "VALID" or "INIT"
-export start_date=20190506 #$(date -d "24 hours ago" '+%Y%m%d')
-export end_date=20201130 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
+#export start_date=20190506 #$(date -d "24 hours ago" '+%Y%m%d')
+#export end_date=20190509 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20201130 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
 export make_met_data_by="VALID"
 export plot_by="VALID"
 ## WEB SETTINGS
@@ -84,7 +86,7 @@ export plot_by="VALID"
 export SEND2WEB="YES"
 export webhost="emcrzdm.ncep.noaa.gov"
 export webhostid="$USER"
-export webdir="/home/people/emc/www/htdocs/gmb/${webhostid}/METplus/replay_ctl_rpl_c00"
+export webdir="/home/people/emc/www/htdocs/gmb/${webhostid}/METplus/replay_ctl_rpl_c00_pres"
 export img_quality="low"
 ## METPLUS SETTINGS
 #MET_version:               MET version to use: 9.1
@@ -171,7 +173,7 @@ if [ $RUN_GRID2GRID_STEP2 = YES ]; then
     #####    g2g2_[type]_grid:            NCEP grid verification was done on
     #g2g2_make_scorecard: create scorecard (YES) or not (NO)
     export g2g2_model_plot_name_list="ctl_c00 rpl_c00"
-    export g2g2_type_list="anom" # pres sfc"
+    export g2g2_type_list="pres" # anom pres sfc"
     export g2g2_anom_truth_name_list="self_anl self_anl"
     export g2g2_anom_gather_by_list="VSDB VSDB"
     export g2g2_anom_fcyc_list="00"
