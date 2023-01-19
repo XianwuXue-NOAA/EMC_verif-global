@@ -5,7 +5,7 @@ module load prod_util/2.0.13
 
 mondays=""
 # For Monday
-fstart=2019051300 #2019050600
+fstart=2019050600 #1300 #2019050600
 fend=2020113000
 finc1=$((7*24))
 fhcnt=$fstart

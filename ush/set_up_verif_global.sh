@@ -111,7 +111,7 @@ fi
 
 ## Set machine specific account, queues, and run settings
 if [ $machine = "WCOSS2" ]; then
-    export ACCOUNT="GFS-DEV"
+    export ACCOUNT="GEFS-DEV"
     export QUEUE="dev"
     export QUEUESHARED="dev_shared"
     export QUEUESERV="dev_transfer"
