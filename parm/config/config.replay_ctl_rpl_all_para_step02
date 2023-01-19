@@ -29,8 +29,8 @@ echo "BEGIN: $(basename ${BASH_SOURCE[0]})"
 #RUN_TROPCYC:         runs METplus verification for tropical cyclone track and intensity error
 #RUN_MAPS2D:          run to make forecast maps including lat-lon and zonal-mean distributions
 #RUN_MAPSDA:          run to make analysis maps of time-mean increments, ENKF ensemble mean and ensemble spread
-export RUN_GRID2GRID_STEP1="YES"
-export RUN_GRID2GRID_STEP2="NO"
+export RUN_GRID2GRID_STEP1="NO"
+export RUN_GRID2GRID_STEP2="YES"
 export RUN_GRID2OBS_STEP1="NO" #"YES"
 export RUN_GRID2OBS_STEP2="NO"
 export RUN_PRECIP_STEP1="NO" #"YES"
@@ -53,23 +53,25 @@ export RUN_MAPSDA="NO"
 #model_hpss_dir_list:    HPSS directory of data
 #model_data_run_hpss:    get files from HPSS ("YES") if not online
 #hpss_walltime:          how long to run HPSS job to get data in minutes
-export model_list="ctl_c00"
-export model_dir_list="/lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive/model_data" #"/lfs/h2/emc/vpppg/noscrub/emc.vpppg/verification/global/archive/model_data"
-export model_stat_dir_list="/lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive" #"/lfs/h2/emc/vpppg/noscrub/$USER/archive"
-export model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H}"
+export model_list="ctl_c00 rpl_c00"
+export model_dir_list="/lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive/model_data /lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive/model_data" #"/lfs/h2/emc/vpppg/noscrub/emc.vpppg/verification/global/archive/model_data"
+export model_stat_dir_list="/lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive /lfs/h2/emc/ens/noscrub/xianwu.xue/VERIFY_GFS/archive" #/vsdb_data_verif_global" #"/lfs/h2/emc/vpppg/noscrub/$USER/archive"
+export model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H} pgbf{lead?fmt=%2H}.ecm.{init?fmt=%Y%m%d%H}"
 export model_data_run_hpss="NO"
-export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory"
+export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory /NCEPPROD/hpssprod/runhistory"
 export hpss_walltime="10"
 ## OUTPUT DATA SETTINGS
 #OUTPUTROOT: base output directory
-export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone"
+export start_date=20190506
+export end_date=20201130
+export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone_ctl_rpl_c00_g2g_step2_${start_date}_${end_date}_para"
 ## DATE SETTINGS
 #start_date:       verification start date, format YYYYMMDD
 #end_date:         verification end date, format YYYYMMDD
 #make_met_data_by: how to treat dates, "VALID" or "INIT"
 #plot_by:          how to plot data, "VALID" or "INIT"
-export start_date=20190506 #20200702 #20200102 #20191003 #20190509 #20190506 #$(date -d "24 hours ago" '+%Y%m%d')
-export   end_date=20201130 #20201130 #20200629 #20191230 #20190930 #20190506 #20201130 #20190627 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
+#export start_date=20190506 #$(date -d "24 hours ago" '+%Y%m%d')
+#export end_date=20190509 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20190627 #20201130 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
 export make_met_data_by="VALID"
 export plot_by="VALID"
 ## WEB SETTINGS
@@ -81,10 +83,10 @@ export plot_by="VALID"
 #             "low", use if you are just viewing the images (internal use)
 #             "medium", use for internal use with collegues (internal use)
 #             "high", use for journals or professional presentations (external use)
-export SEND2WEB="NO"
+export SEND2WEB="YES"
 export webhost="emcrzdm.ncep.noaa.gov"
 export webhostid="$USER"
-export webdir="/home/people/emc/www/htdocs/gmb/${webhostid}/GEFS_replay"
+export webdir="/home/people/emc/www/htdocs/gmb/${webhostid}/METplus/replay_ctl_rpl_c00_all_para"
 export img_quality="low"
 ## METPLUS SETTINGS
 #MET_version:               MET version to use: 9.1
@@ -125,7 +127,7 @@ if [ $RUN_GRID2GRID_STEP1 = YES ]; then
     #g2g1_mv_database_name: name of the METviewer database to send data to, MUST START WITH "mv"
     #g2g1_mv_database_group: name of the group the METviewer database belongs to
     #g2g1_mv_database_desc: description of database, can be blank
-    export g2g1_type_list="anom pres sfc" #"anom" # pres sfc"
+    export g2g1_type_list="anom pres sfc"
     export g2g1_anom_truth_name="self_anl"
     export g2g1_anom_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}"
     export g2g1_anom_fcyc_list="00"
@@ -170,31 +172,31 @@ if [ $RUN_GRID2GRID_STEP2 = YES ]; then
     #####    g2g2_[type]_event_eq:        do event equalization (True) or not (False)
     #####    g2g2_[type]_grid:            NCEP grid verification was done on
     #g2g2_make_scorecard: create scorecard (YES) or not (NO)
-    export g2g2_model_plot_name_list="rpl_c00"
-    export g2g2_type_list="pres" #"anom pres sfc"
-    export g2g2_anom_truth_name_list="self_anl"
-    export g2g2_anom_gather_by_list="VSDB"
+    export g2g2_model_plot_name_list="ctl_c00 rpl_c00"
+    export g2g2_type_list="anom pres sfc" # anom pres sfc"
+    export g2g2_anom_truth_name_list="self_anl self_anl"
+    export g2g2_anom_gather_by_list="VSDB VSDB"
     export g2g2_anom_fcyc_list="00"
     export g2g2_anom_vhr_list="00"
     export g2g2_anom_fhr_min="24"
     export g2g2_anom_fhr_max="240"
-    export g2g2_anom_event_eq="True"
+    export g2g2_anom_event_eq="False"
     export g2g2_anom_grid="G002"
-    export g2g2_pres_truth_name_list="self_anl"
-    export g2g2_pres_gather_by_list="VSDB"
+    export g2g2_pres_truth_name_list="self_anl self_anl"
+    export g2g2_pres_gather_by_list="VSDB VSDB"
     export g2g2_pres_fcyc_list="00"
     export g2g2_pres_vhr_list="00"
     export g2g2_pres_fhr_min="24"
     export g2g2_pres_fhr_max="240"
-    export g2g2_pres_event_eq="True"
+    export g2g2_pres_event_eq="False"
     export g2g2_pres_grid="G002"
-    export g2g2_sfc_truth_name_list="self_f00"
-    export g2g2_sfc_gather_by_list="VSDB"
+    export g2g2_sfc_truth_name_list="self_f00 self_anl"
+    export g2g2_sfc_gather_by_list="VSDB VSDB"
     export g2g2_sfc_fcyc_list="00"
     export g2g2_sfc_vhr_list="00"
     export g2g2_sfc_fhr_min="24"
     export g2g2_sfc_fhr_max="240"
-    export g2g2_sfc_event_eq="True"
+    export g2g2_sfc_event_eq="False"
     export g2g2_sfc_grid="G002"
     export g2g2_make_scorecard="NO"
 fi

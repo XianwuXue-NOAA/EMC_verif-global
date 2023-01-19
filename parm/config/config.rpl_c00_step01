@@ -62,16 +62,16 @@ export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory"
 export hpss_walltime="10"
 ## OUTPUT DATA SETTINGS
 #OUTPUTROOT: base output directory
-xxwdate=${xxwdate:-20201130}
+#xxwdate=${xxwdate:-20201130}
 
-export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone_rpl_sfc_$xxwdate"
+export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone_rpl" #_sfc_$xxwdate"
 ## DATE SETTINGS
 #start_date:       verification start date, format YYYYMMDD
 #end_date:         verification end date, format YYYYMMDD
 #make_met_data_by: how to treat dates, "VALID" or "INIT"
 #plot_by:          how to plot data, "VALID" or "INIT"
-export start_date=$xxwdate #20190606 #20190530 #20190506 #$(date -d "24 hours ago" '+%Y%m%d')
-export   end_date=$xxwdate #20190606 #20190530 #20190506 #20201130 #20190627 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
+export start_date=20190506 #$xxwdate #20190606 #20190530 #20190506 #$(date -d "24 hours ago" '+%Y%m%d')
+export   end_date=20201130 #$xxwdate #20190606 #20190530 #20190506 #20201130 #20190627 #20201130 #$(date -d "24 hours ago" '+%Y%m%d')
 export make_met_data_by="VALID"
 export plot_by="VALID"
 ## WEB SETTINGS
@@ -127,7 +127,7 @@ if [ $RUN_GRID2GRID_STEP1 = YES ]; then
     #g2g1_mv_database_name: name of the METviewer database to send data to, MUST START WITH "mv"
     #g2g1_mv_database_group: name of the group the METviewer database belongs to
     #g2g1_mv_database_desc: description of database, can be blank
-    export g2g1_type_list="sfc" # "anom" # pres sfc"
+    export g2g1_type_list="anom pres sfc" # "anom" # pres sfc"
     export g2g1_anom_truth_name="self_anl"
     export g2g1_anom_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}"
     export g2g1_anom_fcyc_list="00"
